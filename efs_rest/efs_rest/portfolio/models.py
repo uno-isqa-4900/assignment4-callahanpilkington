@@ -75,17 +75,12 @@ class Stock(models.Model):
         return self.customer.cust_number
 
 class User(models.Model):
-    name = models.CharField(max_length=50)
-    address = models.CharField(max_length=200)
-    cust_number = models.IntegerField(blank=False, null=False)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    zipcode = models.CharField(max_length=10)
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    password2 = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=200)
-    cell_phone = models.CharField(max_length=50)
-    created_date = models.DateTimeField(
-        default=timezone.now)
-    updated_date = models.DateTimeField(auto_now_add=True)
 
     def created(self):
         self.created_date = timezone.now()
