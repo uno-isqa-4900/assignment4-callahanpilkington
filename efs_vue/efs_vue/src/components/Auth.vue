@@ -110,7 +110,7 @@
     const apiService = new APIService();
   
   
-  export default {
+    export default {
       name: 'Auth',
   
   

@@ -30,51 +30,44 @@
   
   
                       <div class="form-group row justify-content-around py-2">
-                        <label class="col-4">Category</label>
+                        <label class="col-4">Symbol</label>
                         <div class="col col-8">
-                          <input v-model="stock.category" type="text" class="form-control-sm form-control">
+                          <input v-model="stock.symbol" type="text" class="form-control-sm form-control">
                         </div>
                       </div>          
   
   
                       <div class="form-group row justify-content-around py-2">
-                        <label class="col-4">Description</label>
+                        <label class="col-4">Name</label>
                         <div class="col col-8">
-                          <input v-model="stock.description" type="text" class="form-control-sm form-control">
+                          <input v-model="stock.name" type="text" class="form-control-sm form-control">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group row justify-content-around py-2">
+                        <label class="col-4">Shares</label>
+                        <div class="col col-8">
+                          <input v-model="stock.shares" type="number" class="form-control-sm form-control">
                         </div>
                       </div>
   
-  
                       <div class="form-group row justify-content-around py-2">
-                        <label class="col-4">Acquired Value</label>
+                        <label class="col-4">Purchase Price</label>
                         <div class="col col-8">
-                          <input v-model="stock.acquired_value" type="number" class="form-control-sm form-control">
+                          <input v-model="stock.purchase_price" type="number" class="form-control-sm form-control">
                         </div>
                       </div> 
   
   
                       <div class="form-group row justify-content-around py-2">
-                        <label class="col-4">Acquired Date</label>
+                        <label class="col-4">Purchase Date</label>
                         <div class="col col-8">
-                          <input v-model="stock.acquired_date" type="date" class="form-control-sm form-control">
+                          <input v-model="stock.purchase_date" type="date" class="form-control-sm form-control">
                         </div>
                       </div>
   
   
-                      <div class="form-group row justify-content-around py-2">
-                        <label class="col-4">Recent Value</label>
-                        <div class="col col-8">
-                          <input v-model="stock.recent_value" type="number" class="form-control-sm form-control">
-                        </div>
-                      </div>
-  
-  
-                      <div class="form-group row justify-content-around py-2">
-                        <label class="col-4">Recent Date</label>
-                        <div class="col col-8">
-                          <input v-model="stock.recent_date" type="date" class="form-control-sm form-control">
-                        </div>
-                      </div>
+        
                   
   
   
@@ -142,13 +135,13 @@
           });
         },
         createStock() {
-          apiService.addNewStock(this.stock).then(response => {
-            if (response.status === 201) {
-              this.stock = response.data;
-               this.showMsg = "";
-              router.push('/stock-list/new');
-            }else{
-                this.showMsg = "error";
+            apiService.addNewStock(this.stock).then(response => {
+                if (response.status === 201) {
+                    this.stock = response.data;
+                    this.showMsg = "";
+                router.push('/stock-list/new');
+                }else{
+                    this.showMsg = "error";
             }
           }).catch(error => {
             if (error.response.status === 401) {

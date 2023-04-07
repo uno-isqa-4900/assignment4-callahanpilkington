@@ -66,9 +66,21 @@
               // router.push('/');
               window.location = "/"
           },
+            viewCustomers() {
+                router.push('/customer-list');
+      },
+            viewInvestments() {
+                router.push('/investment-list');
+      },
+            viewStocks() {
+                router.push('/stock-list');
+      },
           login() {
               router.push("/auth");
           },
+          goHome() {
+                router.push('/');
+      }
       }
   };
 </script>

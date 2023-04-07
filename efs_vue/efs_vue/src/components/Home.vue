@@ -202,6 +202,7 @@ import router from '../router'
       viewInvestments() {
         router.push('/investment-list');
       },
+      
       viewStocks() {
         router.push('/stock-list');
       },

@@ -128,7 +128,7 @@
         name: "StockList",
         data: () => ({
             stocks: [],
-            validUserName: "Guest",
+            validUserName: "GUEST",
             stockSize: 0,
             showMsg: '',
             isMobile: false,
@@ -169,8 +169,9 @@
                     this.stocks = response.data.data;
                     this.stockSize = this.stocks.length;
                     if (localStorage.getItem("isAuthenticates")
-                        && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
-                        this.validUserName = JSON.parse(localStorage.getItem("log_user"));
+                        && JSON.parse(localStorage.getItem("isAuthenticates")) === true) 
+                            {
+                            this.validUserName = JSON.parse(localStorage.getItem("log_user"));
                     }
                 }).catch(error => {
                     if (error.response.status === 401) {
