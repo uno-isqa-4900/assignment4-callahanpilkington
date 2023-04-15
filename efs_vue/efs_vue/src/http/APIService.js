@@ -131,11 +131,24 @@
       return axios.post(url, credentials);
     }
   
-   registerUser(credentials) {
-      const url = `${API_URL}/register/`;
-      credentials.customusername = credentials.username
-      return axios.post(url, credentials);
-    }
+//    registerUser(credentials) {
+//       const url = `${API_URL}/register/`;
+//       credentials.customusername = credentials.username
+//       return axios.post(url, credentials);
+//     }
+    registerUser(credentials) {
+        const url = `${API_URL}/register/`;
+        return axios.post(url, credentials)
+        .then(response => {
+            // Handle successful registration response
+            console.log(response.data);
+        })
+        .catch(error => {
+            // Handle registration error
+            console.error(error);
+            throw new Error('Unable to register user');
+        });
+        }
   
 }
 
