@@ -32,13 +32,13 @@
                                   <div class="form-group row justify-content-left py-2">
                                       <label class="col-4">Username</label>
                                       <div class="col col-8">
-                                          <input name="username" v-model="credentials.username" type="text" class="form-control-sm form-control" autocomplete="on">
+                                          <input name="username" v-model="credentials.username" type="text" class="form-control-sm form-control">
                                       </div>
                                   </div>
                                   <div class="form-group row justify-content-end py-2">
                                       <label class="col-4">Password</label>
                                       <div class="col col-8">
-                                          <input v-model="credentials.password" type="password" class="form-control-sm form-control" autocomplete="on">
+                                          <input v-model="credentials.password" type="password" class="form-control-sm form-control">
                                       </div>
                                   </div>
 
@@ -67,11 +67,11 @@
                                       </div>
                                   </div>
                                   <div class="row justify-content-around">
-                                      <!-- <div type="button" class="btn btn-secondary col-6" @click="login">Back to Login</div>     -->
-                                      <button class="btn btn-primary col-4" @click="login">Back to Login</button>
-                                      <!-- <div type="button" class="btn btn-primary col-4" @click="register()">Register</div>    -->
-                                      <button class="btn btn-primary col-4" @click="register">Register</button>
-
+                                    <!-- <button class="btn btn-secondary col-6" @click="login">Back to Login</button> -->
+                                    <button class="btn btn-secondary col-6" v-if="!authenticated" @click="login" > 
+          |                         <router-link :to="{name: 'Auth'}">Back to Log In</router-link></button>
+                                    <button class="btn btn-primary col-4"  @click="registerUser">Register</button>
+   
                                  </div>                                                                                                                                                                                                                      
                          </div>
                       </form>                     
@@ -118,34 +118,33 @@ export default {
     },
     showPassword: false,
   }),
-methods: {
-  register() {
+  methods: {
+  registerUser() {
     apiService.registerUser(this.credentials)
       .then(response => {
         if (response.status === 201) {
-          this.movie = response.data;
-          this.showMsg = "";
+          this.showMsg = '';
+          // Store the user credentials in localStorage
+          localStorage.setItem('credentials', JSON.stringify(this.credentials));
           router.push('/auth/');
         } else {
-          this.showMsg = "error";
+          router.push('/auth');
         }
       })
       .catch(error => {
         if (error.response.status === 401) {
-          router.push("/auth");
+          router.push('/auth');
         } else if (error.response.status === 400) {
-          this.showMsg = "error";
+          router.push('/auth');
         }
       });
   },
-  login() {
-    router.push('/auth/');
-  },
 },
-computed: {
-  passwordConfirmationRule() {
-    return (this.password === this.repassword) || 'Password must match';
-    },
-  },
+
+  computed: {
+    passwordConfirmationRule() {
+      return (this.password === this.repassword) || 'Password must match'
+  }
+  }
 }
 </script>
